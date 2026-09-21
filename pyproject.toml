@@ -1,0 +1,33 @@
+[project]
+name = "ai-lab"
+version = "0.1.0"
+description = "Agentic AI for Test Automation — learning workbook & capstone project"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "openai>=1.0",
+    "mcp[cli]>=1.0",
+    "smolagents>=1.0",
+    "python-dotenv>=1.0",
+    "smolagents[toolkit]",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "playwright>=1.45",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ai_lab"]
+
+[tool.pytest.ini_options]
+# Only ever collect this project's own tests. Without this, pytest's default
+# patterns (test_*.py AND *_test.py) also match exercises/ and demo_repo/,
+# and a bare `pytest` would import practice scripts: running live model
+# calls as an import side effect, and execute demo_repo's 150-second sleep.
+testpaths = ["tests"]

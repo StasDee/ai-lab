@@ -1,0 +1,11 @@
+============================= FAILURES =============================
+_____________________ test_this_one_fails_on_purpose _____________________
+
+    def test_this_one_fails_on_purpose():
+>       assert 2 + 2 == 5
+E       assert (2 + 2) == 5
+
+tests/test_sample.py:13: AssertionError
+===================== short test summary info ======================
+FAILED tests/test_sample.py::test_this_one_fails_on_purpose - assert (2 + 2) == 5
+1 failed, 3 passed in 0.04s

@@ -1,0 +1,28 @@
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="http://localhost:1234/v1",  # 1234/v1 for LM Studio; use :11434/v1 for Ollama
+    api_key="not-needed"  # local servers typically ignore this
+)
+
+stream = client.chat.completions.create(
+    model="qwen2.5-coder-7b-instruct",
+    messages=[
+        {
+            "role": "user",
+            "content": "A test suite has 40 tests, 8 failed, then 3 of those were fixed and re-run "
+                       "successfully. How many tests are now passing?"
+        }],
+    temperature=0.2,
+    stream=True,
+)
+
+for chunk in stream:
+    delta = chunk.choices[0].delta.content
+    if delta:
+        print(delta,
+              end="",
+              flush=True
+              )
+
+print()  # newline once streaming finishes
